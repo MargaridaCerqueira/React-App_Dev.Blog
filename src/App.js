@@ -10,30 +10,29 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  let url = "https://dev.to/api/articles";
-
-  function getArticles() {
-    fetch(url)
-      //This operation returns a promise that could either resolve or reject
-      // we must resolve the Response object to JSON format using the json() method
-      .then((response) => response.json())
-      // This also returns a promise and from there, we can resolve to get the actual data that we need
-      .then((articles) => {
-        console.log(articles);
-        setData(articles);
-        setError(null);
-      })
-      // In case the promise rejects, we will handle the error using the catch()
-      .catch((err) => {
-        setError(err.message);
-        setData(null);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }
-
   useEffect(() => {
+    let url = "https://dev.to/api/articles";
+
+    function getArticles() {
+      fetch(url)
+        //This operation returns a promise that could either resolve or reject
+        // we must resolve the Response object to JSON format using the json() method
+        .then((response) => response.json())
+        // This also returns a promise and from there, we can resolve to get the actual data that we need
+        .then((articles) => {
+          console.log(articles);
+          setData(articles);
+          setError(null);
+        })
+        // In case the promise rejects, we will handle the error using the catch()
+        .catch((err) => {
+          setError(err.message);
+          setData(null);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
     getArticles();
   }, []);
 
