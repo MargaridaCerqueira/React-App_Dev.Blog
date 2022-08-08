@@ -1,5 +1,6 @@
 import BasicCard from "./components/BasicCard";
 import fallback from "./images/fallback.jpg";
+import { Rings } from "react-loader-spinner";
 import { useEffect, useState } from "react";
 
 import "./index.css";
@@ -59,6 +60,18 @@ export default function App() {
   } else if (error) {
     return <div>There is a problem fetching the post data - {error}</div>;
   } else {
-    return "Loading...";
+    return (
+      <div className="loader">
+        {" "}
+        <Rings
+          className="loader-rings"
+          arialabel="ring-loading"
+          height="150"
+          width="150"
+          radius="20"
+          color="blueviolet"
+        />
+      </div>
+    );
   }
 }
