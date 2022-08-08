@@ -1,5 +1,7 @@
 import BasicCard from "./components/BasicCard";
+import fallback from "./images/fallback.jpg";
 import { useEffect, useState } from "react";
+
 import "./index.css";
 
 export default function App() {
@@ -40,7 +42,7 @@ export default function App() {
       alt={article.alt}
       date={article.created_at}
       description={article.description}
-      imgPath={article.cover_image}
+      imgPath={article.cover_image || fallback}
       link="Read more"
       title={article.title}
       url={article.url}
