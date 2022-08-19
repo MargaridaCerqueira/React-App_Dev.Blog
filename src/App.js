@@ -1,18 +1,28 @@
+import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import { reactLocalStorage } from "reactjs-localstorage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+
 import "./index.css";
 
 export default function App() {
+  const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const [theme, setTheme] = reactLocalStorage(
+    "theme",
+    defaultDark ? "dark" : "light"
+  );
+
+  function switchTheme() {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+
   return (
-    <div className="app">
-      <h1>React Router</h1>
+    <div className="App" data-theme={theme}>
       <Router>
-        <header>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/about">About</NavLink>
-        </header>
+        <NavBar theme={theme} handleThemeChange={switchTheme} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

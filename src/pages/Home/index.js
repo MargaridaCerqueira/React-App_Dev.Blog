@@ -1,19 +1,16 @@
+import { useEffect, useState } from "react";
 import BasicCard from "../../components/BasicCard";
 import fallback from "../../images/fallback.jpg";
 import { Rings } from "react-loader-spinner";
-import { useEffect, useState } from "react";
 
 function Home() {
   const [data, setData] = useState([]);
   let [inputValue, setInputValue] = useState("");
-  let [information, setInformation] = useState("");
+  const [information, setInformation] = useState("");
   const [url, setUrl] = useState(`https://dev.to/api/articles`);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    //let url = “https://dev.to/api/articles”;
-    //let url = `https://dev.to/api/articles?tag=${inputValue}`;
-
     function getArticles() {
       setLoading(true);
       fetch(url)
@@ -30,7 +27,28 @@ function Home() {
         });
     }
     getArticles();
+    // to track the url changes, we can pass it as argument
   }, [url]);
+
+  function submitSearch(event) {
+    event.preventDefault();
+    if (inputValue) {
+      setUrl(`https://dev.to/api/articles?tag=${inputValue}`);
+      setInformation(`Find all about ${inputValue}`);
+    } else {
+      // if user click submit button without a value
+      setInformation("Please search for an article topic");
+    }
+  }
+
+  function updateInputValue(event) {
+    setInputValue(event.target.value);
+    if (event.target.value === "") {
+      // if the user cleans the input
+      setUrl(`https://dev.to/api/articles`);
+      setInformation("Please search for an article topic");
+    }
+  }
 
   const articlesArray = data?.map((article) => (
     <BasicCard
@@ -45,34 +63,35 @@ function Home() {
     />
   ));
 
-  function updateInputValue(event) {
-    console.log(event.target.value);
-    setInputValue(event.target.value);
-  }
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log("dentro do submit");
-    if (inputValue) {
-      setUrl(`https://dev.to/api/articles?tag=${inputValue}`);
-      setInformation(`Find all about ${inputValue}`);
-    } else {
-      setInformation("Please search for an article topic");
-    }
-  }
-
   if (!loading) {
     return (
       <div className="App">
-        <h1>Articles</h1>
-        <div>
-          <form onSubmit={handleSubmit}>
-            <input type="search" onChange={updateInputValue} />
-            <button type="submit">Search</button>
+        <h1 className="title_primary">Articles</h1>
+        <div className="search__container">
+          <form onSubmit={submitSearch}>
+            <input
+              className="search__input"
+              type="search"
+              placeholder="Search a topic"
+              onChange={updateInputValue}
+            />
+            <input
+              className="submit__input"
+              type="submit"
+              value="Search"
+            ></input>
+            {/* <button className="search__btn" type="submit">
+              Search
+            </button> */}
+            <div className="search"></div>
           </form>
-          <h3>Search for {inputValue}</h3>
-          <h4>{information}</h4>
+          <div className="articles__container">
+            <h4 className="subtitle">{information}</h4>
+            <div className="articles">
+              {articlesArray.length ? articlesArray : "Sorry no results found"}
+            </div>
+          </div>
         </div>
-        <div className="articles">{data && articlesArray}</div>
       </div>
     );
   } else {

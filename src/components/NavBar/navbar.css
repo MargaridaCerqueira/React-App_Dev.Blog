@@ -1,0 +1,24 @@
+.navbar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  padding: 5px 40px;
+}
+
+.navbar__logo {
+  justify-content: flex-start;
+  font-size: 40px;
+}
+
+.navbar__menu li {
+  list-style: none;
+  display: inline;
+  padding: 0 10px 0 0;
+  font-size: 18px;
+}
+
+.navbar__menu a {
+  text-decoration: none;
+}
