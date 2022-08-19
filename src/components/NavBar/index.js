@@ -20,11 +20,9 @@ function navbar(props) {
               <NavLink to="/About">About</NavLink>
             </li>
           </ul>
-          <div className="switch">
-            <button className="button" onClick={props.handleThemeChange}>
-              {props.theme === "light" ? "Dark" : "Light"} Theme
-            </button>
-          </div>
+          <button className="switch-button" onClick={props.handleThemeChange}>
+            {props.theme === "light" ? "Dark" : "Light"} Theme
+          </button>
         </div>
       </div>
     </header>

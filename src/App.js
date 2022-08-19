@@ -1,7 +1,7 @@
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import { reactLocalStorage } from "reactjs-localstorage";
+import useLocalStorage from "use-local-storage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "./index.css";
@@ -9,7 +9,7 @@ import "./index.css";
 export default function App() {
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-  const [theme, setTheme] = reactLocalStorage(
+  const [theme, setTheme] = useLocalStorage(
     "theme",
     defaultDark ? "dark" : "light"
   );
