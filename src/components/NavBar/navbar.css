@@ -1,25 +1,25 @@
 .header {
   padding: 10px;
-}
-
-.navbar {
-  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 10vh;
-  padding: 40px;
 }
 
-.navbar__logo {
+.logo {
   justify-content: flex-start;
   font-size: 40px;
+  padding-left: 40px;
+}
+
+.navbar {
+  display: flex;
+  padding: 20px;
 }
 
 .navbar__menu li {
-  list-style: none;
   display: inline;
-  padding: 0 10px 0 0;
+  list-style: none;
+  padding: 0 20px 0 0;
   font-size: 18px;
 }
 
