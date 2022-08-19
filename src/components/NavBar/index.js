@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-
 import "./navbar.css";
 
 function navbar(props) {
@@ -21,9 +20,12 @@ function navbar(props) {
             </li>
           </ul>
         </div>
-        <button className="switch-button" onClick={props.handleThemeChange}>
-          {props.theme === "light" ? "Dark" : "Light"} Theme
-        </button>
+
+        {
+          <button className="switch-button" onClick={props.handleThemeChange}>
+            {props.theme === "light" ? "Dark" : "Light"} Theme
+          </button>
+        }
       </div>
     </header>
   );
