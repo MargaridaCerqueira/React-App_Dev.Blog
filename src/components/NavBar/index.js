@@ -3,7 +3,7 @@ import "./navbar.css";
 
 function navbar(props) {
   return (
-    <header className="header">
+    <header className="header__container">
       <div className="logo">
         <span role="img" aria-label="rocket emoji">
           🚀
@@ -13,7 +13,7 @@ function navbar(props) {
         <div className="navbar__menu">
           <ul className="navbar__links">
             <li>
-              <NavLink to="/Home">Home</NavLink>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li>
               <NavLink to="/About">About</NavLink>
@@ -22,8 +22,13 @@ function navbar(props) {
         </div>
 
         {
-          <button className="switch-button" onClick={props.handleThemeChange}>
-            {props.theme === "light" ? "Dark" : "Light"} Theme
+          <button
+            className="switch-button"
+            title="Switch between dark and light mode"
+            aria-label="Switch between dark and light mode"
+            onClick={props.handleThemeChange}
+          >
+            {props.theme === "light" ? "🌙 Dark " : "☀️ Light "} Theme
           </button>
         }
       </div>

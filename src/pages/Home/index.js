@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import BasicCard from "../../components/BasicCard";
 import fallback from "../../images/fallback.jpg";
-import { Rings } from "react-loader-spinner";
+import { RotatingLines } from "react-loader-spinner";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -27,7 +27,7 @@ function Home() {
         });
     }
     getArticles();
-    // to track the url changes, we can pass it as argument
+    // to track the url changes, we can pass it as an argument
   }, [url]);
 
   function submitSearch(event) {
@@ -36,7 +36,7 @@ function Home() {
       setUrl(`https://dev.to/api/articles?tag=${inputValue}`);
       setInformation(`Find all about ${inputValue}`);
     } else {
-      // if user click submit button without a value
+      // if the user click submit button without a value
       setInformation("Please search for an article topic");
     }
   }
@@ -63,52 +63,42 @@ function Home() {
     />
   ));
 
-  if (!loading) {
-    return (
-      <div className="App">
-        <h1 className="title_primary">Articles</h1>
-        <div className="search__container">
-          <form onSubmit={submitSearch}>
-            <input
-              className="search__input"
-              type="search"
-              placeholder="Search a topic"
-              onChange={updateInputValue}
-            />
-            <input
-              className="submit__input"
-              type="submit"
-              value="Search"
-            ></input>
-            {/* <button className="search__btn" type="submit">
-              Search
-            </button> */}
-            <div className="search"></div>
-          </form>
-          <div className="articles__container">
-            <h4 className="subtitle">{information}</h4>
-            <div className="articles">
-              {articlesArray.length ? articlesArray : "Sorry no results found"}
-            </div>
+  return (
+    <div className="search__container">
+      <h1 className="title_primary">Search Articles</h1>
+      <form onSubmit={submitSearch}>
+        <input
+          className="search__input"
+          type="search"
+          placeholder="Search a topic"
+          onChange={updateInputValue}
+        />
+        <input className="submit__input" type="submit" value="Search" />
+        <div className="search"></div>
+      </form>
+      {loading ? (
+        <div className="loader">
+          {" "}
+          <RotatingLines
+            strokeColor="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="96"
+            visible={true}
+          />
+        </div>
+      ) : (
+        <div className="articles__container">
+          <h4 className="subtitle">{information}</h4>
+          <div className="articles">
+            {articlesArray.length
+              ? articlesArray
+              : "Sorry, no results found 😿"}
           </div>
         </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className="loader">
-        {" "}
-        <Rings
-          className="loader-rings"
-          arialabel="ring-loading"
-          height="150"
-          width="150"
-          radius="20"
-          color="blueviolet"
-        />
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
 }
 
 export default Home;

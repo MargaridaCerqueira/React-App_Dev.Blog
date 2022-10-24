@@ -1,0 +1,16 @@
+.footer__container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.footer__subtitle {
+  font-size: 20px;
+}
+
+.social-links a {
+  display: inline;
+  padding: 0 20px 0 0;
+  font-size: 20px;
+}

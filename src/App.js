@@ -1,9 +1,9 @@
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Footer from "./components/Footer";
 import useLocalStorage from "use-local-storage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
 import "./index.css";
 
 export default function App() {
@@ -28,6 +28,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
         </Routes>
       </Router>
+      <Footer />
     </div>
   );
 }
